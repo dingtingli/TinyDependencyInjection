@@ -3,15 +3,15 @@ using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 
-var container = new DependencyRegister();
-container.AddTransient<A>();
-container.AddTransient<IB, B>();
-container.AddScoped<IC, C>();
+var register = new DependencyRegister();
+register.AddTransient<A>();
+register.AddTransient<IB, B>();
+register.AddScoped<IC, C>();
 
-var container1 = container.CreateScope(container);
-var container2 = container.CreateScope(container);
+var register1 = register.CreateScope(register);
+var register2 = register.CreateScope(register);
 
-var resolver1 = new DependencyContainer(container1);
+var resolver1 = new DependencyContainer(register1);
 var c1 = resolver1.GetService<IC>();
 var b1 = resolver1.GetService<IB>();
 var a1 = resolver1.GetService<A>();
@@ -22,7 +22,7 @@ a1.MethodA();
 
 Console.WriteLine("==========");
 
-var resolver2 = new DependencyContainer(container2);
+var resolver2 = new DependencyContainer(register2);
 var c2 = resolver2.GetService<IC>();
 var b2 = resolver2.GetService<IB>();
 var a2 = resolver2.GetService<A>();
@@ -36,9 +36,9 @@ public class DependencyContainer
     DependencyRegister _container;
 
 
-    public DependencyContainer(DependencyRegister container)
+    public DependencyContainer(DependencyRegister register)
     {
-        _container = container;
+        _container = register;
     }
 
     public T GetService<T>()

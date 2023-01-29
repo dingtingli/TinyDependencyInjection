@@ -1,14 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Collections.Concurrent;
 
-var container = new DependencyRegister();
-container.AddRegister<A>();
-container.AddRegister<IB, B>();
-container.AddRegister<IC, C>();
+var register = new DependencyRegister();
+register.AddRegister<A>();
+register.AddRegister<IB, B>();
+register.AddRegister<IC, C>();
 
-var resolver = new DependencyContainer(container);
-//var b = resolver.GetService<IB>();
-var a = resolver.GetService<A>();
+var container = new DependencyContainer(register);
+//var b = container.GetService<IB>();
+var a = container.GetService<A>();
 
 
 //b.MethodB();
@@ -18,9 +18,9 @@ public class DependencyContainer
 {
     DependencyRegister _container;
 
-    public DependencyContainer(DependencyRegister container)
+    public DependencyContainer(DependencyRegister register)
     {
-        _container = container;
+        _container = register;
     }
 
     public T GetService<T>()
@@ -100,7 +100,7 @@ class A
 
     public void MethodA()
     {
-        Console.WriteLine("Class A -> Method A before call Method B");
+        Console.WriteLine("Class A -> Method A / before call Method B");
         _b.MethodB();
     }
 }
@@ -120,7 +120,7 @@ class B : IB
     }
     public void MethodB()
     {
-        Console.WriteLine("Class B -> Method B  before call Method C");
+        Console.WriteLine("Class B -> Method B / before call Method C");
         _c.MethodC();
     }
 }

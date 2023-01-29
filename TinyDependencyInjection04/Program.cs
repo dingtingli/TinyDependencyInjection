@@ -2,15 +2,16 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 
-var container = new DependencyRegister();
-container.AddTransient<A>();
-container.AddTransient<IB, B>();
-container.AddSingleton<IC, C>();
+var register = new DependencyRegister();
+register.AddTransient<A>();
+register.AddTransient<IB, B>();
+register.AddTransient<IC, C>();
+//register.AddSingleton<IC, C>();
 
-var resolver = new DependencyContainer(container);
-var c = resolver.GetService<IC>();
-var b = resolver.GetService<IB>();
-var a = resolver.GetService<A>();
+var container = new DependencyContainer(register);
+var c = container.GetService<IC>();
+var b = container.GetService<IB>();
+var a = container.GetService<A>();
 
 c.MethodC();
 b.MethodB();
@@ -21,9 +22,9 @@ public class DependencyContainer
     DependencyRegister _container;
 
 
-    public DependencyContainer(DependencyRegister container)
+    public DependencyContainer(DependencyRegister register)
     {
-        _container = container;
+        _container = register;
     }
 
     public T GetService<T>()
