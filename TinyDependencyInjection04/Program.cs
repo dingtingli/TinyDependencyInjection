@@ -21,7 +21,6 @@ public class DependencyContainer
 {
     DependencyRegister _container;
 
-
     public DependencyContainer(DependencyRegister register)
     {
         _container = register;
