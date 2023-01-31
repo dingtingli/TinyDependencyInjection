@@ -182,7 +182,7 @@ class A
 
     public void MethodA()
     {
-        Console.WriteLine("Class A -> Method A before call Method B");
+        Console.WriteLine("Class A -> Method A / before call Method B");
         _b.MethodB();
     }
 }
@@ -202,7 +202,7 @@ class B : IB
     }
     public void MethodB()
     {
-        Console.WriteLine("Class B -> Method B  before call Method C");
+        Console.WriteLine("Class B -> Method B / before call Method C");
         _c.MethodC();
     }
 }
