@@ -5,8 +5,8 @@ using System.ComponentModel;
 var register = new DependencyRegister();
 register.AddTransient<A>();
 register.AddTransient<IB, B>();
-register.AddTransient<IC, C>();
-//register.AddSingleton<IC, C>();
+register.AddSingleton<IC, C>();
+//register.AddTransient<IC, C>();
 
 var container = new DependencyContainer(register);
 var c = container.GetService<IC>();
