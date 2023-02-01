@@ -687,6 +687,10 @@ public class DependencyRegister
 
 那么同时满足 `Singleton`(单例) 和 `Singleton`(单例)，可以先实例化一个`DependencyRegister` 叫 `root`，然后每个 `Scoped`(范围)都实例化一个`DependencyRegister`，将这些实例化的对象与 `root` 形成父子关系。
 
+<figure>
+    <img src="./illustration/DI12.JPG" width="700" alt="assembler inversion run time" align="center">
+</figure>
+
 `root` 中保持注册信息，和 `Singleton`(单例) 的对象；子类中保存 `Singleton`(单例)的对象，并且可以访问 `root` 中的信息。
 
 这种父子关系，可以使用下面这种方式实现：
